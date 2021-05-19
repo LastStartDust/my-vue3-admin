@@ -58,7 +58,7 @@ export const routes = [
 
 const createRouterIns = () => createRouter({
   history: createWebHashHistory(),
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({ top: 0 }),
   routes,
 });
 
