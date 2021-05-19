@@ -21,9 +21,12 @@ export default {
     return {
       postForm: {
         usename: '',
-  password: ''
+        password: ''
       }
     }
+  },
+  mounted () {
+    console.log(this.$store);
   },
   methods: {
     handleClick(v) {
