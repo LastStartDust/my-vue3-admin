@@ -18,7 +18,8 @@ import Layout from "layouts/index.vue"
     activeMenu: '/example/list'  如果设置一个path, sidebar将会在高亮匹配项
   }
  */
-export const routes = [
+
+export const constantRoutes = [
   {
     path: '/',
     component: Layout,
@@ -30,7 +31,14 @@ export const routes = [
       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
     }]
   },
-
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/views/404'),
+    hidden: true
+  },
+]
+export const asyncRoutes = [
   {
     path: "/users",
     name: 'UserMgmt',
@@ -53,13 +61,13 @@ export const routes = [
       }
     ],
   },
-];
-
+  { path: '*', redirect: { name: "NotFound" }, hidden: true }
+]
 
 const createRouterIns = () => createRouter({
   history: createWebHashHistory(),
   scrollBehavior: () => ({ top: 0 }),
-  routes,
+  routes: constantRoutes
 });
 
 const router = createRouterIns()
