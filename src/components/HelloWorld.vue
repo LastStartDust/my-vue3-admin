@@ -1,33 +1,40 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <el-button type="primary" @click="handleClick">测试element-plus按钮</el-button>
+  
+  <el-form ref="form" :model="postForm" label-width="80px">
+    <el-form-item label="用户名">
+      <el-input v-model="postForm.usename"></el-input>
+    </el-form-item>
+    <el-form-item label="密码">
+      <el-input type="password" v-model="postForm.password"></el-input>
+    </el-form-item>
+  </el-form>
 
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Documentation
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
-  </p>
-
-  <button @click="state.count++">count is: {{ state.count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
 </template>
 
-<script setup>
-import { defineProps, reactive } from 'vue'
+<script>
+export default {
+  data() {
+    return {
+      postForm: {
+        usename: '',
+  password: ''
+      }
+    }
+  },
+  methods: {
+    handleClick(v) {
+      console.log(v)
+      // Element Plus 为 app.config.globalProperties 添加了全局方法 $message
+      this.$message({
+        type: "success",
+        message: JSON.stringify(this.postForm) 
+      })
+    }
+  }
+}
 
-defineProps({
-  msg: String
-})
-
-const state = reactive({ count: 0 })
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
 </style>
