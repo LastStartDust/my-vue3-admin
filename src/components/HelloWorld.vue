@@ -8,6 +8,9 @@
     <el-form-item label="密码">
       <el-input type="password" v-model="postForm.password"></el-input>
     </el-form-item>
+    <p class="message">
+      <span>测试文本</span>
+    </p>
   </el-form>
 
 </template>
@@ -36,5 +39,10 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.message {
+  span {
+    color: skyblue;
+  }
+}
 </style>
