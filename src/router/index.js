@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router"
-import Layout from "layouts/index.vue"
+import Layout from "@/layout/index.vue"
 
 /**
  * Note: 子菜单仅当路由的children.length >= 1时才出现
@@ -27,18 +27,10 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/dashboard/index.vue'),
       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
     }]
   },
-  {
-    path: '/404',
-    name: 'NotFound',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
-]
-export const asyncRoutes = [
   {
     path: "/users",
     name: 'UserMgmt',
@@ -53,7 +45,7 @@ export const asyncRoutes = [
       {
         path: "list",
         name: 'UserList',
-        component: () => import("views/users/list.vue"),
+        component: () => import("@/views/users/index.vue"),
         meta: {
           title: "用户列表",
           icon: "el-icon-document",
@@ -61,6 +53,14 @@ export const asyncRoutes = [
       }
     ],
   },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/views/404.vue'),
+    // hidden: true
+  },
+]
+export const asyncRoutes = [
   { path: '*', redirect: { name: "NotFound" }, hidden: true }
 ]
 
