@@ -3,7 +3,7 @@ import getters from './getters'
 import app from './modules/app'
 import permission from './modules/permission'
 import settings from './modules/settings'
-// import user from './modules/user'
+import user from './modules/user'
 import tagsView from './modules/tagsView'
 
 const store = createStore({
@@ -11,7 +11,7 @@ const store = createStore({
     app,
     permission,
     settings,
-    // user,
+    user,
     tagsView
   },
   getters
