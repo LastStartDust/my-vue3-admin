@@ -21,6 +21,18 @@ import Layout from "@/layout/index.vue"
 
 export const constantRoutes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/views/404.vue'),
+    hidden: true
+  },
+  {
     path: '/',
     component: Layout,
     redirect: { name: 'Dashboard' },
@@ -52,12 +64,6 @@ export const constantRoutes = [
         },
       }
     ],
-  },
-  {
-    path: '/404',
-    name: 'NotFound',
-    component: () => import('@/views/404.vue'),
-    // hidden: true
   },
 ]
 export const asyncRoutes = [
