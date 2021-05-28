@@ -1,4 +1,6 @@
 // 是否使用mock
+const isUseMock = true
+
 export default {
 
   title: 'my-vue3-admin',
@@ -24,4 +26,5 @@ export default {
    * @type {boolean} true | false
    * @description 是否使用mock, 只在开发环境使用
    */
+  isUseMock: import.meta.env.MODE === 'development' && isUseMock
 }
