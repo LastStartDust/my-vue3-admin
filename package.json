@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "element-plus": "^1.0.2-beta.44",
     "js-cookie": "^2.2.1",
     "nprogress": "^0.2.0",
@@ -19,7 +20,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "^3.0.5",
+    "mockjs": "^1.1.0",
     "sass": "^1.32.13",
+    "svg-sprite-loader": "^6.0.6",
     "vite": "^2.3.3",
     "vite-plugin-style-import": "^0.10.0"
   }
