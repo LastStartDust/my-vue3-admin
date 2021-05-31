@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import '@/permission' // permission control
-import '@/plugins/execute-mock-xhr'
 import '@/styles/index.scss' // global css
 
 import App from './App.vue'
