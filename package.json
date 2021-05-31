@@ -24,6 +24,7 @@
     "sass": "^1.32.13",
     "svg-sprite-loader": "^6.0.6",
     "vite": "^2.3.3",
+    "vite-plugin-mock": "^2.6.3",
     "vite-plugin-style-import": "^0.10.0"
   }
 }
