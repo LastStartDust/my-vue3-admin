@@ -43,6 +43,9 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
     }]
   },
+]
+
+export const asyncRoutes = [
   {
     path: "/users",
     name: 'UserMgmt',
@@ -65,8 +68,6 @@ export const constantRoutes = [
       }
     ],
   },
-]
-export const asyncRoutes = [
   { path: '/:pathMatch(.*)', redirect: { name: "NotFound" }, hidden: true }
 ]
 

@@ -15,7 +15,6 @@
         <template v-if="permission_routes">
           <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
         </template>
-        <!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
       </el-menu>
     </el-scrollbar>
   </div>
@@ -31,19 +30,11 @@ import { constantRoutes } from '@/router';
 export default {
   name: "sidebar",
   components: { SidebarItem, Logo },
-  data() {
-    return {
-      permission_routes: []
-    }
-  },
-  created() {
-    this.permission_routes = constantRoutes
-  },
   mounted () {
   },
   computed: {
     ...mapGetters([
-      // 'permission_routes',
+      'permission_routes',
       'sidebar'
     ]),
     activeMenu() {
