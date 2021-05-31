@@ -3,7 +3,7 @@
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
-        ref="tag"
+        ref="setTagRef"
         :key="tag.path"
         :class="isActive(tag)?'active':''"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
@@ -36,7 +36,8 @@ export default {
       top: 0,
       left: 0,
       selectedTag: {},
-      affixTags: []
+      affixTags: [],
+      tagRefs: []
     }
   },
   computed: {
@@ -109,7 +110,7 @@ export default {
       return false
     },
     moveToCurrentTag() {
-      const tags = this.$refs.tag
+      const tags = this.tagRefs
       console.log(tags);
       this.$nextTick(() => {
         for (const tag of tags) {
@@ -192,6 +193,9 @@ export default {
     },
     handleScroll() {
       this.closeMenu()
+    },
+    setTagRef(el) {
+      this.tagRefs.push(el)
     }
   }
 }
