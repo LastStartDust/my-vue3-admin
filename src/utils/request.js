@@ -3,6 +3,7 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 import { printSuccess, printError } from '@/utils/print'
+import { SUCCESS_CODE } from '@/utils/index';
 
 const isDev = import.meta.env.MODE !== 'production'
 
@@ -42,7 +43,7 @@ service.interceptors.response.use(
     const res = response.data
 
     // 自定义状态码不是20000，认为请求异常
-    if (res.code !== 20000) {
+    if (res.code !== SUCCESS_CODE) {
       ElMessage({
         message: res.message || 'Error',
         type: 'error',
