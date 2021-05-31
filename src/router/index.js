@@ -67,7 +67,7 @@ export const constantRoutes = [
   },
 ]
 export const asyncRoutes = [
-  { path: '*', redirect: { name: "NotFound" }, hidden: true }
+  { path: '/:pathMatch(.*)', redirect: { name: "NotFound" }, hidden: true }
 ]
 
 const createRouterIns = () => createRouter({
