@@ -1,9 +1,11 @@
 <template>
   <div>
-    用户列表页面
-  </div>
-  <div>
-    <p v-if="list">{{ list }}</p>
+    <div>
+      用户列表页面
+    </div>
+    <div>
+      <p v-if="list">{{ list }}</p>
+    </div>
   </div>
 </template>
 
