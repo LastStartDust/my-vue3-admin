@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router"
 import Layout from "@/layout/index.vue"
-import nestedRouter from '@/router/modules/nested'
+import nestedRoute from '@/router/modules/nested'
+import goodsRoute from '@/router/modules/goods'
 
 /**
  * Note: 子菜单仅当路由的children.length >= 1时才出现
@@ -69,7 +70,8 @@ export const asyncRoutes = [
       }
     ],
   },
-  nestedRouter,
+  nestedRoute,
+  goodsRoute,
   { path: '/:pathMatch(.*)', redirect: { name: "NotFound" }, hidden: true }
 ]
 

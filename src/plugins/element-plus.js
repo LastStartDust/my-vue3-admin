@@ -15,7 +15,16 @@ import {
   ElDropdownMenu,
   ElBreadcrumb,
   ElBreadcrumbItem,
-  ElAlert
+  ElAlert,
+  ElCol,
+  ElRow,
+  ElTable,
+  ElTableColumn,
+  ElTag,
+  ElPagination,
+  ElInputNumber,
+  ElSelect,
+  ElOption
 } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css';
 
@@ -34,7 +43,16 @@ const components = [
   ElDropdownMenu,
   ElBreadcrumb,
   ElBreadcrumbItem,
-  ElAlert
+  ElAlert,
+  ElCol,
+  ElRow,
+  ElTable,
+  ElTableColumn,
+  ElTag,
+  ElPagination,
+  ElInputNumber,
+  ElSelect,
+  ElOption
 ] 
 
 // 插件列表
