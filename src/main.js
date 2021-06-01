@@ -7,10 +7,12 @@ import { useElementPlus } from '@/plugins/element-plus';
 import svgIcon from '@/components/svgIcon/index.vue'
 import store from '@/store';
 import router from '@/router';
+import Pagination from '@/components/Pagination/index.vue'
 
 createApp(App)
 .use(router)
 .use(useElementPlus)
 .use(store)
 .component('svg-icon', svgIcon)
+.component('Pagination', Pagination)
 .mount('#app')
