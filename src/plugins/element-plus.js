@@ -14,7 +14,8 @@ import {
   ElDropdownItem,
   ElDropdownMenu,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElAlert
 } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css';
 
@@ -32,7 +33,8 @@ const components = [
   ElDropdownItem,
   ElDropdownMenu,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElAlert
 ] 
 
 // 插件列表
