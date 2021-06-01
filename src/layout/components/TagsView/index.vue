@@ -111,7 +111,6 @@ export default {
     },
     moveToCurrentTag() {
       const tags = this.tagRefs
-      console.log(tags);
       this.$nextTick(() => {
         for (const tag of tags) {
           if (tag.to.path === this.$route.path) {
