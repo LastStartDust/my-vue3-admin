@@ -2,7 +2,8 @@ const Mock = require('mockjs')
 import { 
   SUCCESS_CODE,
   isEmpty,
-  getArrRandomCount
+  getArrRandomCount,
+  parseRawRequest
 } from '../util';
 
 function genOneItem() {
@@ -11,7 +12,8 @@ function genOneItem() {
     title: '@ctitle',
     'status|1': [0, 1, 2],
     price: '@integer(300, 5000)',
-    display_time: '@datetime'
+    display_time: '@datetime',
+    'size|1': [1, 2, 3],
   })
 } 
 
@@ -103,9 +105,9 @@ export default [
   {
     url: /\/goods\/list\/[0-9]+/,
     method: 'get',
-    response: config => {
-      console.log(config.url)
-      const id = config.url.split('/goods/list/')[1] || ''
+    rawResponse: async (req, res) => {
+      const { url, body }  = await parseRawRequest(req)
+      const id = url.replace(/[^\d]/g, '') || ''
       let detail = ''
       for(const item of goodsList) {
         if(+item.id === +id) {
@@ -113,11 +115,13 @@ export default [
         }
       }
 
-      return {
+      res.setHeader('Content-Type', 'application/json');
+      res.statusCode = 200;
+      res.end(JSON.stringify({
         code: SUCCESS_CODE,
         data: detail
-      }
-    }
+      }))
+    },
   },
   {
     url: /\/goods\/list/,
