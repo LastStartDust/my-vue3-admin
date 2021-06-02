@@ -62,6 +62,12 @@ const plugins = [
   ElMessageBox,
 ]
 
+// 设置语言为中文
+import { locale } from 'element-plus'
+import lang from 'element-plus/lib/locale/lang/zh-cn'
+import 'dayjs/locale/zh-cn'
+locale(lang)
+
 // 暴露出useElementPlus方法，给vue实例调用
 export function useElementPlus(app) {
   components.forEach(component => {
