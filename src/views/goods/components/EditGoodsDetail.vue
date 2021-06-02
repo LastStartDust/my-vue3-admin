@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <el-form ref="postFormRef" :model="postForm" :rules="postFormRules" label-width="120px" label-suffix="：">
-    <el-form-item label="名称" prop="name">
-        <el-input v-model="postForm.name" />
+    <el-form-item label="标题" prop="title">
+        <el-input v-model="postForm.title" />
       </el-form-item>
       <el-form-item label="价格" prop="price">
         <el-input-number v-model="postForm.price" />
@@ -32,7 +32,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import { sizeStatusOptions } from '../options'
 
 const defaultPostForm = {
-  name: '',
+  title: '',
   price: '',
   brand_id: '',
   keywords: '',
