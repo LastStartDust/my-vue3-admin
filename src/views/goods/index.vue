@@ -45,11 +45,7 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
-        <template #default="scope">
-          {{ scope.row.name }}
-        </template>
-      </el-table-column>
+      <el-table-column label="Title" prop="title" />
       <el-table-column label="Author" width="110" align="center">
         <template #default="scope">
           <span>{{ scope.row.price }}</span>
@@ -74,7 +70,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" v-model:page="listQuery.page" v-model:limit="listQuery.limit" @pagination="getList" />
   </div>
 </template>
 
@@ -96,22 +92,24 @@ export default {
     }
   },
   created() {
-    // this.getList()
+    this.getList()
   },
   activated() {
-    // if (this.$route.query.flush) {
-    //   this.getList()
-    // }
+    if (this.$route.query.flush) {
+      this.getList()
+    }
   },
   methods: {
-    getList() {
+    async getList() {
       this.listLoading = true
-      getGoods(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
-      }).finally(() => {
+      try {
+        const { data: { list, total } } = await getGoods(this.listQuery)
+        this.list = list
+        this.total = total
         this.listLoading = false
-      })
+      } catch (error) {
+        this.listLoading = false
+      }
     },
     handleSearch() {
       this.listQuery.page = 1
