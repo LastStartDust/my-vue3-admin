@@ -93,11 +93,6 @@ export default {
   created() {
     this.getList()
   },
-  activated() {
-    if (this.$route.params.flush) {
-      this.getList()
-    }
-  },
   methods: {
     async getList() {
       this.listLoading = true
@@ -128,4 +123,3 @@ export default {
   }
 }
 </script>
-
