@@ -130,7 +130,7 @@ export default [
       const body = config.body
       const baseGoods = genOneItem()
       const item = Object.assign(baseGoods, body)
-      goodsList.push(item)
+      goodsList.unshift(item)
 
       return {
         code: SUCCESS_CODE,

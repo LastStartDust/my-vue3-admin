@@ -33,12 +33,8 @@ import { sizeStatusOptions } from '../options'
 
 const defaultPostForm = {
   title: '',
-  price: '',
-  brand_id: '',
-  keywords: '',
-  product: '',
-  desc: '',
-  favorite: ''
+  price: 0,
+  size: ''
 }
 
 export default {
@@ -63,12 +59,6 @@ export default {
       const id = this.$route.query.id
       this.postForm.id = id
       this.getDetail(this.postForm.id)
-        .then(() => {
-          this.$refs.infoFormRef.initEdit()
-        })
-        .catch(err => {
-          console.log(err)
-        })
     }
   },
   methods: {
@@ -88,7 +78,7 @@ export default {
         requestApi(postFormCopy)
           .then(res => {
             this.$message.success(`${this.isEdit ? '编辑成功' : '新增成功'}`)
-            this.$router.push({ name: 'GoodsList', query: { flush: true }})
+            this.$router.push({ name: 'GoodsList', params: { flush: true }})
           })
           .finally(() => {
             this.hideLoading()
@@ -102,17 +92,9 @@ export default {
     handleCancel() {
       this.$router.back()
     },
-    getDetail(id) {
-      return new Promise((resolve, reject) => {
-        getGoodsDetail(id).then(res => {
-          const data = res.data
-          this.postForm = data
-          resolve(data)
-        }).catch(err => {
-          console.log(err)
-          reject(err)
-        })
-      })
+    async getDetail(id) {
+      const res = await getGoodsDetail(id)
+      this.postForm = res.data
     }
   }
 }

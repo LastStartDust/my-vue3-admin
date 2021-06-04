@@ -94,7 +94,7 @@ export default {
     this.getList()
   },
   activated() {
-    if (this.$route.query.flush) {
+    if (this.$route.params.flush) {
       this.getList()
     }
   },
@@ -105,10 +105,10 @@ export default {
         const { data: { list, total } } = await getGoods(this.listQuery)
         this.list = list
         this.total = total
-        this.listLoading = false
       } catch (error) {
-        this.listLoading = false
+        console.log(error);
       }
+      this.listLoading = false
     },
     handleSearch() {
       this.listQuery.page = 1
@@ -120,7 +120,6 @@ export default {
       this.handleSearch()
     },
     handleAdd() {
-      console.log('add')
       this.$router.push({ name: 'AddGoods' })
     },
     handleEdit(id) {
