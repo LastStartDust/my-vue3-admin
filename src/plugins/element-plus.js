@@ -24,7 +24,9 @@ import {
   ElPagination,
   ElInputNumber,
   ElSelect,
-  ElOption
+  ElOption,
+  ElDescriptions,
+  ElDescriptionsItem
 } from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css';
 
@@ -52,7 +54,9 @@ const components = [
   ElPagination,
   ElInputNumber,
   ElSelect,
-  ElOption
+  ElOption,
+  ElDescriptions,
+  ElDescriptionsItem
 ] 
 
 // 插件列表

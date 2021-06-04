@@ -27,6 +27,13 @@ export default   {
       component: () => import('@/views/goods/edit.vue'),
       meta: { title: 'EditGoods', icon: 'edit', noCache: true },
       hidden: true
+    },
+    {
+      path: 'view',
+      name: 'ViewGoods',
+      component: () => import('@/views/goods/view.vue'),
+      meta: { title: 'ViewGoods', noCache: true },
+      hidden: true
     }
   ]
 }

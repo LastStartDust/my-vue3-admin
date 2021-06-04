@@ -65,6 +65,7 @@
       <el-table-column align="center" label="action" width="200">
         <template #default="scope">
           <el-button type="primary" @click="handleEdit(scope.row.id)">编辑</el-button>
+          <el-button type="primary" @click="handleView(scope.row.id)">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -119,6 +120,9 @@ export default {
     },
     handleEdit(id) {
       this.$router.push({ name: 'EditGoods', query: { id }})
+    },
+    handleView(id) {
+      this.$router.push({ name: 'ViewGoods', query: { id }})
     }
   }
 }
