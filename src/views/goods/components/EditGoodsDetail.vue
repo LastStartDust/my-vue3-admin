@@ -78,7 +78,10 @@ export default {
         requestApi(postFormCopy)
           .then(res => {
             this.$message.success(`${this.isEdit ? '编辑成功' : '新增成功'}`)
-            this.$router.push({ name: 'GoodsList', params: { flush: true }})
+            this.$store.dispatch('tagsView/delCurrentView', {
+              view: this.$route,
+              $router: this.$router
+            })
           })
           .finally(() => {
             this.hideLoading()
