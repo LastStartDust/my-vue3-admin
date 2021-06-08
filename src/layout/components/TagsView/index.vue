@@ -21,7 +21,8 @@
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭当前</li>
       <li @click="closeOthersTags">关闭其他</li>
       <li @click="closeAllTags(selectedTag)">全部关闭</li>
-      <li @click="closeAllTags(selectedTag)">关闭右侧标签</li>
+      <li @click="closeDirTags(selectedTag, 'left')">关闭左侧标签</li>
+      <li @click="closeDirTags(selectedTag, 'right')">关闭右侧标签</li>
     </ul>
   </div>
 </template>
@@ -196,6 +197,21 @@ export default {
     },
     setTagRef(el) {
       this.tagRefs.push(el)
+    },
+    closeDirTags(view, dir) {
+      this.$store.dispatch('tagsView/delDirViews', { view, dir }).then(({ visitedViews }) => {
+        let needUpdateVisited = true
+        // 判断当前路由对应的页面是否包含在删除项内,如果在，需要激活最后一项路由
+        for (const [, v] of this.visitedViews.entries()) {
+          if (this.$route.name === v.name) {
+            needUpdateVisited = false
+            break
+          }
+        }
+        if (needUpdateVisited) {
+          this.toLastView(visitedViews, view)
+        }
+      })
     }
   }
 }

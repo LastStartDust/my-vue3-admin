@@ -63,7 +63,37 @@ const mutations = {
         break
       }
     }
-  }
+  },
+
+  // 删除 左侧/右侧
+  DEL_DIR_VISITED_VIEWS(state, { view, dir }) {
+    let visitedViews = [...state.visitedViews]
+    for (const [i, v] of visitedViews.entries()) {
+      if (v.name === view.name) {
+        if (dir === 'right') {
+          let len = visitedViews.length - (i + 1) // 右边还有 len 个项
+          visitedViews.splice(i + 1, len)
+        } else {
+          visitedViews = visitedViews.slice(i)
+        }
+        break
+      }
+    }
+    state.visitedViews = visitedViews
+  },
+  DEL_DIR_CACHED_VIEWS(state, { view, dir }) {
+    const index = state.cachedViews.indexOf(view.name)
+    let cachedViews = [...state.cachedViews]
+    if (index > -1) {
+      if (dir === 'right') {
+        let len = cachedViews.length - (index + 1) // 右边还有 len 个项
+        cachedViews.splice(index + 1, len)
+      } else {
+        cachedViews = cachedViews.slice(index)
+      }
+    }
+    state.cachedViews = cachedViews
+  },
 }
 
 const actions = {
@@ -160,7 +190,31 @@ const actions = {
     } else {
       $router.push('/')
     }
-  }
+  },
+
+  // 删除 左侧/右侧
+  delDirViews({ dispatch, state }, { view, dir }) {
+    return new Promise(resolve => {
+      dispatch('delDirVisitedViews', { view, dir })
+      dispatch('delDirCachedViews', { view, dir })
+      resolve({
+        visitedViews: [...state.visitedViews],
+        cachedViews: [...state.cachedViews]
+      })
+    })
+  },
+  delDirVisitedViews({ commit, state }, { view, dir }) {
+    return new Promise(resolve => {
+      commit('DEL_DIR_VISITED_VIEWS', { view, dir })
+      resolve([...state.visitedViews])
+    })
+  },
+  delDirCachedViews({ commit, state }, { view, dir }) {
+    return new Promise(resolve => {
+      commit('DEL_DIR_CACHED_VIEWS', { view, dir })
+      resolve([...state.cachedViews])
+    })
+  },
 }
 
 export default {
