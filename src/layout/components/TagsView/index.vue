@@ -172,6 +172,22 @@ export default {
         }
       }
     },
+    // 切换为第一个路由
+    toFirstView(visitedViews, view) {
+      const firstView = visitedViews.slice(0)[0]
+      if (firstView) {
+        this.$router.push(firstView.fullPath)
+      } else {
+        // now the default is to redirect to the home page if there is no tags-view,
+        // you can adjust it according to your needs.
+        if (view.name === 'Dashboard') {
+          // to reload home page
+          this.$router.replace({ path: '/redirect' + view.fullPath })
+        } else {
+          this.$router.push('/')
+        }
+      }
+    },
     openMenu(tag, e) {
       const menuMinWidth = 105
       const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
@@ -198,18 +214,19 @@ export default {
     setTagRef(el) {
       this.tagRefs.push(el)
     },
+    // 关闭左侧 / 右侧路由
     closeDirTags(view, dir) {
       this.$store.dispatch('tagsView/delDirViews', { view, dir }).then(({ visitedViews }) => {
-        let needUpdateVisited = true
-        // 判断当前路由对应的页面是否包含在删除项内,如果在，需要激活最后一项路由
-        for (const [, v] of this.visitedViews.entries()) {
-          if (this.$route.name === v.name) {
-            needUpdateVisited = false
-            break
+        // 当前激活路由是否仍然存在，如果不存在，就激活离选定最近一项
+        const isIncludeActiveRoute = visitedViews.find(route => this.isActive(route))
+        if(!isIncludeActiveRoute) {
+          if(dir === 'right') {
+            // 如果移除右侧的，就切换到末尾路由
+            this.toLastView(visitedViews, view)
+          } else {
+            // 如果移除左侧的，就切换到第一个路由
+            this.toFirstView(visitedViews, view)
           }
-        }
-        if (needUpdateVisited) {
-          this.toLastView(visitedViews, view)
         }
       })
     }
