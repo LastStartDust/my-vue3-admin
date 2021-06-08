@@ -9,18 +9,19 @@
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         tag="span"
         class="tags-view-item"
-        @click.middle.native="!isAffix(tag)?closeSelectedTag(tag):''"
-        @contextmenu.prevent.native="openMenu(tag,$event)"
+        @click.middle="!isAffix(tag)?closeSelectedTag(tag):''"
+        @contextmenu.prevent="openMenu(tag,$event)"
       >
         {{ tag.title }}
         <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>
-      <li @click="closeOthersTags">Close Others</li>
-      <li @click="closeAllTags(selectedTag)">Close All</li>
+      <li @click="refreshSelectedTag(selectedTag)">重新加载</li>
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭当前</li>
+      <li @click="closeOthersTags">关闭其他</li>
+      <li @click="closeAllTags(selectedTag)">全部关闭</li>
+      <li @click="closeAllTags(selectedTag)">关闭右侧标签</li>
     </ul>
   </div>
 </template>
