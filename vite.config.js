@@ -19,7 +19,7 @@ export default ({ command }) => {
         // close support .ts file
         supportTs: false,
         // default
-        // 是否启用本地mock
+        // 是否启用本地mock 
         localEnabled: !isBuild,
         // 生产环境是否启用mock
         prodEnabled: isBuild,
@@ -63,7 +63,7 @@ export default ({ command }) => {
       }
     },
     build: {
-      sourcemap: true
+      sourcemap: !isBuild
     }
   })
 }
