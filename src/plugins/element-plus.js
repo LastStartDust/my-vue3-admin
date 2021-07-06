@@ -71,7 +71,7 @@ import { locale } from 'element-plus'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 // https://github.com/anncwb/vite-plugin-style-import/issues/16
-// 掘金elementplus locale在不同模式下导出不同
+// 解决elementplus locale在不同模式下导出不同
 if (typeof locale === "function") {
   locale(lang);       // dev
 } else {
