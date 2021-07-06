@@ -1,10 +1,5 @@
-const Mock = require('mockjs')
-import { 
-  SUCCESS_CODE,
-  isEmpty,
-  getArrRandomCount,
-  parseRawRequest
-} from '../util';
+import Mock from 'mockjs'
+import { SUCCESS_CODE, isEmpty, getArrRandomCount, parseRawRequest } from '../util'
 
 function genOneItem() {
   return Mock.mock({
@@ -13,17 +8,17 @@ function genOneItem() {
     'status|1': [0, 1, 2],
     price: '@integer(300, 5000)',
     display_time: '@datetime',
-    'size|1': [1, 2, 3],
+    'size|1': [1, 2, 3]
   })
-} 
+}
 
-const goodsList = ((len) => {
+const goodsList = ((len = 50) => {
   const list = []
   for (let i = 0; i < len; i++) {
     list.push(genOneItem())
   }
   return list
-})(count = 50);
+})()
 
 const brandList = ['OBBO', 'WE', 'ME'].map((item, index) => {
   return {
@@ -59,7 +54,7 @@ const brandProduct = [
   }
 ]
 
-const productList = brandList.map(item => {
+const productList = brandList.map((item) => {
   return {
     id: item.id,
     name: item.name,
@@ -72,22 +67,21 @@ export default [
     // 表格列表
     url: '/goods/list',
     method: 'get',
-    response: config => {
-
+    response: (config) => {
       // 下面是获取列表
       const { id, title, status, page, limit } = config.query
 
       // 条件筛选
-      let mockList = goodsList.filter(item => {
-        if(!isEmpty(id) && item.id !== +id) return false
-        if(!isEmpty(title) && item.title !== title) return false
-        if(!isEmpty(status) && item.status !== +status) return false
+      let mockList = goodsList.filter((item) => {
+        if (!isEmpty(id) && item.id !== +id) return false
+        if (!isEmpty(title) && item.title !== title) return false
+        if (!isEmpty(status) && item.status !== +status) return false
         return true
       })
 
       // 分页查询
       const pageList = mockList.filter((item, index) => {
-        if( index < limit * page && index >= limit * (page -1) ) {
+        if (index < limit * page && index >= limit * (page - 1)) {
           return true
         }
         return false
@@ -106,27 +100,29 @@ export default [
     url: /\/goods\/list\/[0-9]+/,
     method: 'get',
     rawResponse: async (req, res) => {
-      const { url, body }  = await parseRawRequest(req)
+      const { url, body } = await parseRawRequest(req)
       const id = url.replace(/[^\d]/g, '') || ''
       let detail = ''
-      for(const item of goodsList) {
-        if(+item.id === +id) {
+      for (const item of goodsList) {
+        if (+item.id === +id) {
           detail = item
         }
       }
 
-      res.setHeader('Content-Type', 'application/json');
-      res.statusCode = 200;
-      res.end(JSON.stringify({
-        code: SUCCESS_CODE,
-        data: detail
-      }))
-    },
+      res.setHeader('Content-Type', 'application/json')
+      res.statusCode = 200
+      res.end(
+        JSON.stringify({
+          code: SUCCESS_CODE,
+          data: detail
+        })
+      )
+    }
   },
   {
     url: /\/goods\/list/,
     method: 'post',
-    response: config => {
+    response: (config) => {
       const body = config.body
       const baseGoods = genOneItem()
       const item = Object.assign(baseGoods, body)
@@ -141,11 +137,11 @@ export default [
   {
     url: /\/goods\/list/,
     method: 'put',
-    response: config => {
+    response: (config) => {
       const body = config.body
       let index = ''
       const item = goodsList.find((item, i) => {
-        if(item.id === +body.id) {
+        if (item.id === +body.id) {
           index = i
           return item
         }
@@ -176,12 +172,11 @@ export default [
     // 产品选项
     url: /\/goods\/product\/options/,
     method: 'get',
-    response: config => {
-
+    response: (config) => {
       // 下面是获取列表
       const { id } = config.query
       let productItem = {}
-      productItem = productList.find(item => item.id === +id)
+      productItem = productList.find((item) => item.id === +id)
 
       return {
         code: SUCCESS_CODE,
@@ -190,5 +185,5 @@ export default [
         }
       }
     }
-  },
+  }
 ]
