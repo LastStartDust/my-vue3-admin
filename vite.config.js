@@ -5,11 +5,12 @@ import path from 'path';
 import { svgBuilder } from './src/plugins/svg-builder'
 import { viteMockServe } from "vite-plugin-mock"
 
-let prodMock = true;
-const port = 9528
 
 // https://vitejs.dev/config/
 export default ({ command }) => {
+  // command命令: 有serve和build两个值，分别对应开发和打包构建
+  // console.log('command', command);
+  const isBuild = command === 'build'
   return defineConfig({
     plugins: [
       vue(),
@@ -18,8 +19,10 @@ export default ({ command }) => {
         // close support .ts file
         supportTs: false,
         // default
-        localEnabled: command === 'serve',
-        prodEnabled: command !== 'serve' && prodMock,
+        // 是否启用本地mock
+        localEnabled: !isBuild,
+        // 生产环境是否启用mock
+        prodEnabled: isBuild,
         injectCode: `
           import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
@@ -58,6 +61,9 @@ export default ({ command }) => {
           rewrite: (path) => path.replace(new RegExp(`^/dev-api`), '')
         }
       }
+    },
+    build: {
+      sourcemap: true
     }
   })
 }
