@@ -1,0 +1,20 @@
+{
+  "files.autoSave": "off",
+  "eslint.workingDirectories": [
+    "./my-vue3-admin"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue-html",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
