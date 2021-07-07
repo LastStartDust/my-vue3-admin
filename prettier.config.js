@@ -1,5 +1,5 @@
 module.exports = {
-  printWidth: 160, // 单行输出（不折行）的（最大）长度
+  printWidth: 80, // 单行输出（不折行）的（最大）长度
   tabWidth: 2, // 每个缩进级别的空格数
   useTabs: false, // 是否使用缩进符
   semi: false, // 是否在语句末尾打印分号
@@ -12,5 +12,5 @@ module.exports = {
   htmlWhitespaceSensitivity: 'ignore', // 指定 HTML 文件的全局空白区域敏感度, "ignore" - 空格被认为是不敏感的
   endOfLine: 'lf', // 换行符使用 lf,
   insertPragma: false, // 在文件的顶部插入一个 @format的特殊注释
-  requirePragma: false // Prettier可以严格按照按照文件顶部的一些特殊的注释格式化代码
+  requirePragma: false, // Prettier可以严格按照按照文件顶部的一些特殊的注释格式化代码
 }

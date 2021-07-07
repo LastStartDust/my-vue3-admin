@@ -21,5 +21,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     'plugin:prettier/recommended' // 使用prettier中的样式规范，且如果使得ESLint会检测prettier的格式问题，同样将格式问题以error的形式抛出. 确保在最后一个.
-  ]
+  ],
+  // 置空规则，使用prettier接替
+  rules: {}
 }
