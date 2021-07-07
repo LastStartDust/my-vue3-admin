@@ -7,17 +7,17 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar" class="user-avatar">
+          <img :src="avatar" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
 
         <template #dropdown>
-          <el-dropdown-menu  class="user-dropdown">
+          <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
               <el-dropdown-item>首页</el-dropdown-item>
             </router-link>
             <el-dropdown-item divided @click.native="logout">
-              <span style="display:block;">登 出</span>
+              <span style="display: block">登 出</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -30,21 +30,21 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Hamburger from '@/components/Hamburger/index.vue'
-import avatar from '@/assets/avatar.gif';
+import avatar from '@/assets/avatar.gif'
 
 export default {
+  components: {
+    Breadcrumb,
+    Hamburger
+  },
   data() {
     return {
       avatar
     }
   },
-  components: {
-    Breadcrumb,
-    Hamburger
-  },
   computed: {
     ...mapGetters([
-      'sidebar',
+      'sidebar'
       // 'avatar'
     ])
   },
@@ -66,18 +66,18 @@ export default {
   overflow: hidden;
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
     line-height: 46px;
     height: 100%;
     float: left;
     cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      background: rgba(0, 0, 0, .025)
+      background: rgba(0, 0, 0, 0.025);
     }
   }
 
@@ -104,15 +104,15 @@ export default {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, .025)
+          background: rgba(0, 0, 0, 0.025);
         }
       }
     }
 
-    :deep .avatar-container {
+    :deep(.avatar-container) {
       margin-right: 30px;
 
       .avatar-wrapper {
