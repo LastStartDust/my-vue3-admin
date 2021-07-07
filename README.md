@@ -10,13 +10,13 @@ git clone https://gitee.com/violet-mio/my-vue3-admin.git
 cd my-vue3-admin
 
 # 安装依赖
-npm install
+yarn
 ```
 
 # 启动服务
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 浏览器访问 [http://localhost:9528](http://localhost:9528)
@@ -25,8 +25,22 @@ npm run dev
 
 ```bash
 # 构建测试环境
-npm run build:stage
+yarn build:stage
 
 # 构建生产环境
-npm run build:prod
+yarn build:prod
+
+# 代码格式检查
+yarn lint
+
+# 代码格式检查并自动修复
+yarn lint:fix
+```
+
+## 其它
+# 代码格式检查
+yarn lint
+
+# 代码格式检查并自动修复
+yarn lint:fix
 ```
