@@ -9,8 +9,8 @@ module.exports = {
   trailingComma: 'none', // 去除对象最末尾元素跟随的逗号
   jsxBracketSameLine: false, // 在jsx中把'>' 是否单独放一行
   jsxSingleQuote: false, // jsx 不使用单引号，而使用双引号
-  arrowParens: 'always', // 箭头函数，只有一个参数的时候，也需要括号
-  proseWrap: 'always', // 当超出print width（上面有这个参数）时就折行
-  htmlWhitespaceSensitivity: 'strict',
-  endOfLine: 'lf' // 换行符使用 lf
+  htmlWhitespaceSensitivity: 'ignore', // 指定 HTML 文件的全局空白区域敏感度, "ignore" - 空格被认为是不敏感的
+  endOfLine: 'lf', // 换行符使用 lf,
+  insertPragma: false, // 在文件的顶部插入一个 @format的特殊注释
+  requirePragma: false // Prettier可以严格按照按照文件顶部的一些特殊的注释格式化代码
 }
