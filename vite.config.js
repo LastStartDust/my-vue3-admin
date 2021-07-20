@@ -54,7 +54,10 @@ export default ({ command }) => {
       proxy: {
         // 匹配 / 的转发请求到 http://127.0.0.1:8888/
         '/dev-api': {
-          target: `http://localhost:3000`, // 目标服务器
+          // target: `http://localhost:3000`, // 目标服务器
+          target: settings.isUseMock
+            ? `http://localhost:3000` // 开发目标服务器
+            : `https://test.apilab.cn/v1/60f553d260b22ade4c8e0702/api`, // 线上目标服务器
           changeOrigin: true,
           ws: true,
           // 路径重写,去掉了 '/'
