@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import styleImport from 'vite-plugin-style-import'
-import path from 'path';
+import path from 'path'
 import { svgBuilder } from './src/plugins/svg-builder'
-import { viteMockServe } from "vite-plugin-mock"
-
+import { viteMockServe } from 'vite-plugin-mock'
+import settings from './src/settings'
 
 // https://vitejs.dev/config/
 export default ({ command }) => {
@@ -19,14 +19,14 @@ export default ({ command }) => {
         // close support .ts file
         supportTs: false,
         // default
-        // 是否启用本地mock 
-        localEnabled: !isBuild,
+        // 是否启用本地mock
+        localEnabled: settings.isUseMock,
         // 生产环境是否启用mock
-        prodEnabled: isBuild,
+        prodEnabled: settings.isUseMock,
         injectCode: `
           import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
-        `,
+        `
       }),
       styleImport({
         libs: [
@@ -35,20 +35,20 @@ export default ({ command }) => {
             esModule: true,
             ensureStyleFile: true,
             resolveStyle: (name) => {
-              return `element-plus/lib/theme-chalk/${name}.css`;
+              return `element-plus/lib/theme-chalk/${name}.css`
             },
             resolveComponent: (name) => {
-              return `element-plus/lib/${name}`;
-            },
+              return `element-plus/lib/${name}`
+            }
           }
         ]
       }),
-      svgBuilder('./src/icons/svg/'),
+      svgBuilder('./src/icons/svg/')
     ],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "src"),
-      },
+        '@': path.resolve(__dirname, 'src')
+      }
     },
     server: {
       proxy: {
@@ -67,4 +67,3 @@ export default ({ command }) => {
     }
   })
 }
-
