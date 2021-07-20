@@ -1,4 +1,4 @@
-import { SUCCESS_CODE } from '../util';
+import { SUCCESS_CODE } from '../util'
 
 const tokens = {
   admin: {
@@ -13,25 +13,27 @@ const users = {
   'admin-token': {
     roles: ['admin'],
     introduction: 'I am a super administrator',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    avatar:
+      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: 'Super Admin'
   },
   'editor-token': {
     roles: ['editor'],
     introduction: 'I am an editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    avatar:
+      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: 'Normal Editor'
   }
 }
 
-console.log('user mock 启动');
+console.log('user mock 启动')
 
 export default [
   // user login
   {
-    url: '/vue-admin-template/user/login',
+    url: '/user/login',
     method: 'post',
-    response: config => {
+    response: (config) => {
       const { username } = config.body
       const token = tokens[username]
 
@@ -52,9 +54,9 @@ export default [
 
   // get user info
   {
-    url: '/vue-admin-template/user/info',
+    url: '/user/info',
     method: 'get',
-    response: config => {
+    response: (config) => {
       const { token } = config.query
       const info = users[token]
 
@@ -75,9 +77,9 @@ export default [
 
   // user logout
   {
-    url: '/vue-admin-template/user/logout',
+    url: '/user/logout',
     method: 'post',
-    response: _ => {
+    response: (_) => {
       return {
         code: SUCCESS_CODE,
         data: 'success'
