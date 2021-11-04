@@ -9,8 +9,12 @@ on:
 # 任务
 jobs:
   build-and-deploy:
-    # 服务器环境：最新版 Ubuntu
-    runs-on: ubuntu-latest
+    # 服务器环境
+    runs-on: centos-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+
     steps:
       # 拉取代码
       - name: Checkout
