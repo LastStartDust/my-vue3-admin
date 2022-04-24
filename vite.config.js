@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import styleImport from 'vite-plugin-style-import'
 import path from 'path'
-import { svgBuilder } from './src/plugins/svg-builder'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
 import settings from './src/settings'
 
@@ -43,7 +43,17 @@ export default ({ command }) => {
           }
         ]
       }),
-      svgBuilder('./src/icons/svg/')
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
+        // 指定symbolId格式
+        symbolId: 'icon-[dir]-[name]',
+        /**
+         * custom dom id
+         * @default: __svg__icons__dom__
+         */
+        customDomId: '__svg__icons__dom__'
+      })
     ],
     resolve: {
       alias: {
@@ -56,7 +66,7 @@ export default ({ command }) => {
         '/dev-api': {
           // target: `http://localhost:3000`, // 目标服务器
           target: settings.isUseMock
-            ? `http://localhost:3000` // 开发目标服务器
+            ? `http://localhost:3001` // 开发目标服务器
             : `https://test.apilab.cn/v1/60f553d260b22ade4c8e0702/api`, // 线上目标服务器
           changeOrigin: true,
           ws: true,
