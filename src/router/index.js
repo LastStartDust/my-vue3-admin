@@ -1,5 +1,5 @@
-import { createRouter, createWebHashHistory } from "vue-router"
-import Layout from "@/layout/index.vue"
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Layout from '@/layout/index.vue'
 import nestedRoute from '@/router/modules/nested'
 import goodsRoute from '@/router/modules/goods'
 
@@ -49,48 +49,61 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: { name: 'Dashboard' },
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index.vue'),
-      meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-    }]
-  },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index.vue'),
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+      }
+    ]
+  }
 ]
 
 export const asyncRoutes = [
   {
-    path: "/users",
+    path: '/users',
     name: 'UserMgmt',
     component: Layout,
     meta: {
-      title: "用户管理",
-      icon: "el-icon-user-solid",
+      title: '用户管理',
+      icon: 'el-icon-user-solid'
     },
     redirect: { name: 'UserList' },
     alwaysShow: true,
     children: [
       {
-        path: "list",
+        path: 'list',
         name: 'UserList',
-        component: () => import("@/views/users/index.vue"),
+        component: () => import('@/views/users/index.vue'),
         meta: {
-          title: "用户列表",
-          icon: "el-icon-document",
-        },
+          title: '用户列表',
+          icon: 'el-icon-document'
+        }
       }
-    ],
+    ]
   },
   nestedRoute,
   goodsRoute,
-  { path: '/:pathMatch(.*)', redirect: { name: "NotFound" }, hidden: true }
+  {
+    path: '/external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+        meta: { title: 'External Link', icon: 'link' }
+      }
+    ]
+  },
+  { path: '/:pathMatch(.*)', redirect: { name: 'NotFound' }, hidden: true }
 ]
 
-const createRouterIns = () => createRouter({
-  history: createWebHashHistory(),
-  scrollBehavior: () => ({ top: 0 }),
-  routes: constantRoutes
-});
+const createRouterIns = () =>
+  createRouter({
+    history: createWebHashHistory(),
+    scrollBehavior: () => ({ top: 0 }),
+    routes: constantRoutes
+  })
 
 const router = createRouterIns()
 
@@ -100,4 +113,4 @@ export function resetRouter() {
   router.matcher = newRouter.matcher // reset router
 }
 
-export default router;
+export default router
