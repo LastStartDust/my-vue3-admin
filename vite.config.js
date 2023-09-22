@@ -1,13 +1,17 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import styleImport from 'vite-plugin-style-import'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
 import settings from './src/settings'
+import getPort from 'get-port'
 
 // https://vitejs.dev/config/
-export default ({ command }) => {
+export default async ({ command }) => {
+  const port = await getPort({ port: 3000 })
   // command命令: 有serve和build两个值，分别对应开发和打包构建
   // console.log('command', command);
   const isBuild = command === 'build'
@@ -28,20 +32,11 @@ export default ({ command }) => {
           setupProdMockServer();
         `
       }),
-      styleImport({
-        libs: [
-          {
-            libraryName: 'element-plus',
-            esModule: true,
-            ensureStyleFile: true,
-            resolveStyle: (name) => {
-              return `element-plus/lib/theme-chalk/${name}.css`
-            },
-            resolveComponent: (name) => {
-              return `element-plus/lib/${name}`
-            }
-          }
-        ]
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
       }),
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
@@ -61,12 +56,13 @@ export default ({ command }) => {
       }
     },
     server: {
+      port,
       proxy: {
         // 匹配 / 的转发请求到 http://127.0.0.1:8888/
         '/dev-api': {
           // target: `http://localhost:3000`, // 目标服务器
           target: settings.isUseMock
-            ? `http://localhost:3001` // 开发目标服务器
+            ? `http://localhost:${port}` // 开发目标服务器
             : `https://test.apilab.cn/v1/60f553d260b22ade4c8e0702/api`, // 线上目标服务器
           changeOrigin: true,
           ws: true,
